@@ -4,24 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>RecipleaseMkg.xcscheme_^#shared#^_</key>
+		<key>Alamofire.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>0</integer>
+		</dict>
+		<key>Pods-RecipleaseMkg.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>DC0C80CC29B0909000932827</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DCBAEB7329D472E4006FE03F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>
