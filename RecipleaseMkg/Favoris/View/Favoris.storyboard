@@ -318,6 +318,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="favoriteButton" destination="O1M-hc-Saa" id="9Km-Jr-fQ3"/>
+                        <outlet property="getDirectionButton" destination="4LO-Os-6eu" id="tJz-uB-50r"/>
                         <outlet property="imageRecipe" destination="HAJ-7b-eMQ" id="Ysn-Gw-Mlb"/>
                         <outlet property="noteYieldLabel" destination="UNH-ey-72s" id="25S-HU-guw"/>
                         <outlet property="tableView" destination="zXL-IO-Orq" id="xWm-wp-1OB"/>

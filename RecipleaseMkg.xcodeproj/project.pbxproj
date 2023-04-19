@@ -141,18 +141,14 @@
 		DC0C80CF29B0909000932827 /* RecipleaseMkg */ = {
 			isa = PBXGroup;
 			children = (
+				DC0C80DE29B0909200932827 /* Info.plist */,
 				DC934BA029BF2B01005218EA /* AlertDisplay */,
-				DC0C80D029B0909000932827 /* AppDelegate.swift */,
-				DC0C80D229B0909000932827 /* SceneDelegate.swift */,
 				DC49E9A129E80E0F00D6F1C0 /* CoreData */,
 				DCB217D429D196EF00B5D471 /* Ingredient */,
 				DC0C80E429B0921900932827 /* Research */,
 				DC0C80E529B0923100932827 /* Favoris */,
 				DC2C5F5C29B37D080063E6E2 /* APIService */,
-				DC0C80D629B0909000932827 /* Main.storyboard */,
-				DC0C80D929B0909200932827 /* Assets.xcassets */,
-				DC0C80DB29B0909200932827 /* LaunchScreen.storyboard */,
-				DC0C80DE29B0909200932827 /* Info.plist */,
+				DC70E40629F001510005F8FF /* Supporting Files */,
 			);
 			path = RecipleaseMkg;
 			sourceTree = "<group>";
@@ -262,6 +258,18 @@
 				DC2C5F0029B137930063E6E2 /* IngredientViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		DC70E40629F001510005F8FF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DC0C80DB29B0909200932827 /* LaunchScreen.storyboard */,
+				DC0C80D929B0909200932827 /* Assets.xcassets */,
+				DC0C80D629B0909000932827 /* Main.storyboard */,
+				DC0C80D029B0909000932827 /* AppDelegate.swift */,
+				DC0C80D229B0909000932827 /* SceneDelegate.swift */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		DC85FF7629D8C49D008EBDD5 /* TestResearchModel */ = {

@@ -12,7 +12,6 @@ final class IngredientModel {
     
     
     //MARK: - Properties
-   // private let coreDataStackIngr: CoreDataStack
     
     public static let shared = IngredientModel (context: CoreDataStackIngredient.viewContext)
     
@@ -22,11 +21,9 @@ final class IngredientModel {
         self.favContext = context
     }
     
-    
-    
     //MARK: - Repository
     func getIngredient (callback: @escaping ([Ingredients]) -> Void) {
-
+        
         let request : NSFetchRequest<Ingredients> = Ingredients.fetchRequest()
         do {
             let ingredients = try favContext.fetch(request)
@@ -37,7 +34,7 @@ final class IngredientModel {
     }
     
     func saveIngredient (named name: String, callback: @escaping ([Ingredients]) -> Void) {
-       
+        
         let ingredient = Ingredients(context: favContext)
         ingredient.name = name
         do {

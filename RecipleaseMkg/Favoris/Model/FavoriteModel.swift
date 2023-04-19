@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 
 class FavoriteModel {
-    
+    //MARK: -Properties
     static let shared = FavoriteModel()
     let persistentContainer: NSPersistentContainer
-    
+    //MARK: -Init
     init(container: NSPersistentContainer = NSPersistentContainer(name: "FavoritesRecipesCoreData")) {
         self.persistentContainer = container
         persistentContainer.loadPersistentStores { description, error in
@@ -23,10 +23,12 @@ class FavoriteModel {
         }
     }
     
+    //MARK: -Repository
     func fetchFavorites(completion: @escaping ([Recipe]) -> Void) {
         let managedObjectContext = persistentContainer.viewContext
+        //create a request
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoritesRecipes")
-        
+        //launch a request by using the method fetch of NSManagedObjectContext
         do {
             let result = try managedObjectContext.fetch(fetchRequest)
             var favoriteRecipes: [Recipe] = []
@@ -57,6 +59,7 @@ class FavoriteModel {
     func checkIfFavorite(recipeName: String) -> Bool {
         let managedObjectContext = persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoritesRecipes")
+        //use predicate to infiltrate data
         fetchRequest.predicate = NSPredicate(format: "label = %@", recipeName )
         
         let result = try? managedObjectContext.fetch(fetchRequest)

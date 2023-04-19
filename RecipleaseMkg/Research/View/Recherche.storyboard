@@ -476,7 +476,7 @@
                 <navigationController storyboardIdentifier="Recherche01" id="Xh0-lj-aGV" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Recherche" image="magnifyingglass.circle" catalog="system" id="6yv-Bk-1Nx"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="N9q-De-GDD">
-                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

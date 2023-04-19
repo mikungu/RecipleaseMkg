@@ -9,6 +9,8 @@ import UIKit
 
 class PresentTableViewCell: UITableViewCell {
     
+    //MARK: -Outlets
+    
     @IBOutlet weak var imageViewCell: UIImageView!
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -19,7 +21,7 @@ class PresentTableViewCell: UITableViewCell {
     
     @IBOutlet weak var timeLabel: UILabel!
     
-    
+    //MARK: -Override
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -32,6 +34,7 @@ class PresentTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    //MARK: -Methods
     func labelAccessibility () {
         titleLabel.isAccessibilityElement = true
         titleLabel.accessibilityHint = " recipe title "

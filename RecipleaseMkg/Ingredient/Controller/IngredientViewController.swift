@@ -47,7 +47,6 @@ class IngredientViewController: UIViewController {
     @IBAction func clearButton(_ sender: Any) {
         ingredientSavedField.text = nil
         ingredientModel.deleteIngredient(callback: { ingredients in
-            //var ingredientText = ingredients
         })
     }
     

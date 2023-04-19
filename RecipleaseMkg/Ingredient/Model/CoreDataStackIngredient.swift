@@ -11,7 +11,7 @@ import CoreData
 class CoreDataStackIngredient {
     static let sharedInstance = CoreDataStackIngredient()
     
-    // MARK: - CORE DATA STACK
+    // MARK: -Core Data Stack
 
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "CoreDataRecherche")
@@ -31,7 +31,7 @@ class CoreDataStackIngredient {
         return persistentContainer.viewContext
     }
 
-    // MARK: - CORE DATA SAVING SUPPORT
+    // MARK: -Core Data Saving Support
     
     func saveContext () {
         let context = persistentContainer.viewContext
