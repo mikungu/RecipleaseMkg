@@ -15,10 +15,10 @@ final class IngredientModel {
     
     public static let shared = IngredientModel (context: CoreDataStackIngredient.viewContext)
     
-    let favContext: NSManagedObjectContext
+    let IngredientContext: NSManagedObjectContext
     
     public init(context: NSManagedObjectContext) {
-        self.favContext = context
+        self.IngredientContext = context
     }
     
     //MARK: - Repository
@@ -26,7 +26,7 @@ final class IngredientModel {
         
         let request : NSFetchRequest<Ingredients> = Ingredients.fetchRequest()
         do {
-            let ingredients = try favContext.fetch(request)
+            let ingredients = try IngredientContext.fetch(request)
             callback(ingredients)
         } catch {
             callback([])
@@ -35,10 +35,10 @@ final class IngredientModel {
     
     func saveIngredient (named name: String, callback: @escaping ([Ingredients]) -> Void) {
         
-        let ingredient = Ingredients(context: favContext)
+        let ingredient = Ingredients(context: IngredientContext)
         ingredient.name = name
         do {
-            try favContext.save()
+            try IngredientContext.save()
             callback([ingredient])
         } catch {
             print("We were unable to save \(name)")
@@ -49,9 +49,9 @@ final class IngredientModel {
         
         let request : NSFetchRequest<Ingredients> = Ingredients.fetchRequest()
         do {
-            let ingredients = try favContext.fetch(request)
+            let ingredients = try IngredientContext.fetch(request)
             for objetToDelete in ingredients {
-                favContext.delete (objetToDelete)
+                IngredientContext.delete (objetToDelete)
             }
             callback?(ingredients)
         } catch {
@@ -59,7 +59,7 @@ final class IngredientModel {
         }
         
         do {
-            try favContext.save()
+            try IngredientContext.save()
         } catch {
             print("We were unable to save")
         }
