@@ -22,8 +22,8 @@ class IngredientViewController: UIViewController {
     @IBOutlet weak var searchButton: UIButton!
     
     //MARK: - Properties
-    private let ingredientModel = IngredientModel.shared
-    var searchModel = SearchModel ()
+    private let ingredientM = IngredientModel()
+    var searchModel = SearchModel (httpClient: APIService())
     
     //MARK: - Override
     override func viewDidLoad() {
@@ -46,7 +46,7 @@ class IngredientViewController: UIViewController {
     
     @IBAction func clearButton(_ sender: Any) {
         ingredientSavedField.text = nil
-        ingredientModel.deleteIngredient(callback: { ingredients in
+        ingredientM.deleteIngredient(completion: { ingredients in
         })
     }
     
@@ -74,7 +74,7 @@ class IngredientViewController: UIViewController {
     
     //MARK: - Private
     private func getIngredientsPlus () {
-        ingredientModel.getIngredient(callback: {[weak self] ingredients in
+        ingredientM.getIngredient (completion: {[weak self] ingredients in
             var ingredientText = ""
             for ingredient in ingredients {
                 if let name = ingredient.name {
@@ -99,7 +99,7 @@ extension IngredientViewController: UITextFieldDelegate {
             let ingredientName = ingredientField.text,
             var ingredient = ingredientSavedField.text
         else { return }
-        ingredientModel.saveIngredient(named: ingredientName, callback: {[weak self] ingredients in
+        ingredientM.saveIngredient(named: ingredientName, completion: {[weak self] ingredients in
             ingredient += ingredientName + "\n"
             self?.ingredientSavedField.text = ingredient
             self?.ingredientField.text = ""

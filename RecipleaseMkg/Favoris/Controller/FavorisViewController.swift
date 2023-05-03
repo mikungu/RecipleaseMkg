@@ -12,6 +12,7 @@ class FavorisViewController: UIViewController {
     //MARK: -Outlets
     @IBOutlet weak var tableFavoriteRecipe: UITableView!
     //MARK: -Properties
+    private let favoriteModel = FavoriteModel()
     private var favoriteRecipes = [Recipe]()
     
     //MARK: -Override
@@ -36,7 +37,7 @@ class FavorisViewController: UIViewController {
         }
     }
     func fetchFavorites() {
-        FavoriteModel.shared.fetchFavorites { [weak self] recipes in
+        favoriteModel.fetchFavorites { [weak self] recipes in
             self?.favoriteRecipes = recipes
             self?.tableFavoriteRecipe.reloadData()
         }

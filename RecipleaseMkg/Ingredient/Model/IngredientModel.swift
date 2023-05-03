@@ -7,63 +7,33 @@
 
 import Foundation
 import CoreData
+import UIKit
 
-final class IngredientModel {
+
+class IngredientModel {
+    let coreDataGenericService : CoreDataGenericService<Ingredients>
     
-    
-    //MARK: - Properties
-    
-    public static let shared = IngredientModel (context: CoreDataStackIngredient.viewContext)
-    
-    let IngredientContext: NSManagedObjectContext
-    
-    public init(context: NSManagedObjectContext) {
-        self.IngredientContext = context
+    init(coreDataGenericService: CoreDataGenericService<Ingredients> = CoreDataGenericService(context: CoreDataStack.sharedInstance.persistentContainer.viewContext)) {
+        self.coreDataGenericService = coreDataGenericService
     }
     
-    //MARK: - Repository
-    func getIngredient (callback: @escaping ([Ingredients]) -> Void) {
-        
-        let request : NSFetchRequest<Ingredients> = Ingredients.fetchRequest()
-        do {
-            let ingredients = try IngredientContext.fetch(request)
-            callback(ingredients)
-        } catch {
-            callback([])
-        }
-    }
+    //let coreDataService = CoreDataGenericService<Ingredients>(context: CoreDataStack.sharedInstance.persistentContainer.viewContext)
     
-    func saveIngredient (named name: String, callback: @escaping ([Ingredients]) -> Void) {
-        
-        let ingredient = Ingredients(context: IngredientContext)
+    func saveIngredient (named name: String, completion: @escaping ([Ingredients]) -> Void) {
+        let ingredient = coreDataGenericService.createObject()
         ingredient.name = name
-        do {
-            try IngredientContext.save()
-            callback([ingredient])
-        } catch {
-            print("We were unable to save \(name)")
-        }
+        coreDataGenericService.save()
+        completion ([ingredient])
     }
     
-    func deleteIngredient (callback: (([Ingredients]) -> Void)?) {
+    func getIngredient (completion: @escaping ([Ingredients]) -> Void) {
+        let ingredients = coreDataGenericService.getObject()
+        completion (ingredients)
         
-        let request : NSFetchRequest<Ingredients> = Ingredients.fetchRequest()
-        do {
-            let ingredients = try IngredientContext.fetch(request)
-            for objetToDelete in ingredients {
-                IngredientContext.delete (objetToDelete)
-            }
-            callback?(ingredients)
-        } catch {
-            callback?([])
-        }
-        
-        do {
-            try IngredientContext.save()
-        } catch {
-            print("We were unable to save")
-        }
     }
     
+    func deleteIngredient (completion: @escaping ([Ingredients]) -> Void) {
+        coreDataGenericService.deleteObject()
+    }
 }
 

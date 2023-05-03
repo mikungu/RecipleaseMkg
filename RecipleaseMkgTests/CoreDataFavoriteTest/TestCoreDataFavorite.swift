@@ -10,30 +10,36 @@ import Foundation
 import CoreData
 @testable import RecipleaseMkg
 
-class TestCoreDataStack: CoreDataStackFavorite {
-    override init() {
-        super.init()
-        
-        // Creates an in-memory persistent store
+class TestCoreDataFavorite {
+    // MARK: -Core Data Stack
+    
+    static let modelName = "FavoritesRecipesCoreData"
+    static let model: NSManagedObjectModel = {
+        let modelURL = Bundle.main.url(forResource: modelName, withExtension: "momd")!
+        return NSManagedObjectModel(contentsOf: modelURL)!
+    }()
+    
+    lazy var testContainer : NSPersistentContainer = {
         let persistentStoreDescription = NSPersistentStoreDescription()
         persistentStoreDescription.type = NSInMemoryStoreType
-        
-        // Creates an NSPersistentContainer instance, passing in the modelName and NSManageObjectModel stored in the CoreDataStack
-        let container = NSPersistentContainer(
-            name: CoreDataStackFavorite.modelName,
-            managedObjectModel: CoreDataStackFavorite.model)
-        
-        // Assigns the in-memory persistent store to the container
+
+        let container = NSPersistentContainer(name: TestCoreDataFavorite.modelName, managedObjectModel: TestCoreDataFavorite.model)
+
         container.persistentStoreDescriptions = [persistentStoreDescription]
-        
         container.loadPersistentStores { _, error in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         }
-        
-        // Overrides the storeContainer in CoreDataStack
-        storeContainer = container
+        return container
+    }()
+
+    static var testContainer: NSPersistentContainer {
+        return TestCoreDataFavorite().testContainer
+    }
+
+    static var testContext : NSManagedObjectContext {
+        return testContainer.viewContext
     }
 }
 

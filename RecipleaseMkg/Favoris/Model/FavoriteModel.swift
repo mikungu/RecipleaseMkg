@@ -10,64 +10,38 @@ import Foundation
 import CoreData
 
 class FavoriteModel {
-    //MARK: -Properties
-    static let shared = FavoriteModel()
-    let persistentContainer: NSPersistentContainer
-    //MARK: -Init
-    init(container: NSPersistentContainer = NSPersistentContainer(name: "FavoritesRecipesCoreData")) {
-        self.persistentContainer = container
-        persistentContainer.loadPersistentStores { description, error in
-            if error != nil {
-                print("Failed to init core data")
-            }
-        }
-    }
     
-    //MARK: -Repository
+    let coreDataGenericService : CoreDataGenericService2<FavoritesRecipes>
+    
+    init(coreDataGenericService: CoreDataGenericService2<FavoritesRecipes> = CoreDataGenericService2(context: CoreDataStackFav.sharedInstance.persistentContainer.viewContext)) {
+        self.coreDataGenericService = coreDataGenericService
+    }
+   // let coreDataService = CoreDataGenericService2<FavoritesRecipes>()
+    
     func fetchFavorites(completion: @escaping ([Recipe]) -> Void) {
-        let managedObjectContext = persistentContainer.viewContext
-        //create a request
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoritesRecipes")
-        //launch a request by using the method fetch of NSManagedObjectContext
-        do {
-            let result = try managedObjectContext.fetch(fetchRequest)
-            var favoriteRecipes: [Recipe] = []
-            for favorite in result as! [NSManagedObject] {
-                guard let label = favorite.value(forKey: "label") as? String else { return }
-                guard let image = favorite.value(forKey: "image") as? String else { return }
-                guard let url = favorite.value(forKey: "url") as? String else { return }
-                guard let yield = favorite.value(forKey: "yield") as? String else { return }
-                guard let ingredientLinesString = favorite.value(forKey: "ingredientLines") as? String else { return }
-                let ingredientLines = ingredientLinesString.components(separatedBy: "$j%^")
-                guard let totalTime = favorite.value(forKey: "totalTime") as? String else {return}
-                let recipeCD = Recipe(label: label,
-                                      image: image,
-                                      url: url,
-                                      yield:Double(yield) ?? 4,
-                                      ingredientLines: ingredientLines,
-                                      totalTime: Int(totalTime))
-                favoriteRecipes.append(recipeCD)
-            }
-            completion(favoriteRecipes)
-            
-        } catch let error {
-            completion([])
-            print("Error getting favorites == \(error.localizedDescription)")
+        let result = coreDataGenericService.getObject()
+        var favoriteRecipes: [Recipe] = []
+        for favorite in result {
+            guard let label = favorite.value(forKey: "label") as? String else { return }
+            guard let image = favorite.value(forKey: "image") as? String else { return }
+            guard let url = favorite.value(forKey: "url") as? String else { return }
+            guard let yield = favorite.value(forKey: "yield") as? String else { return }
+            guard let ingredientLinesString = favorite.value(forKey: "ingredientLines") as? String else { return }
+            let ingredientLines = ingredientLinesString.components(separatedBy: "$j%^")
+            guard let totalTime = favorite.value(forKey: "totalTime") as? String else {return}
+            let recipeCD = Recipe(label: label, image: image, url: url, yield: Double(yield) ?? 4, ingredientLines: ingredientLines, totalTime: Int(totalTime))
+            favoriteRecipes.append(recipeCD)
         }
+        completion(favoriteRecipes)
     }
     
     func checkIfFavorite(recipeName: String) -> Bool {
-        let managedObjectContext = persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoritesRecipes")
-        //use predicate to infiltrate data
-        fetchRequest.predicate = NSPredicate(format: "label = %@", recipeName )
-        
-        let result = try? managedObjectContext.fetch(fetchRequest)
-        return result?.count == 1 ? true: false
+        let result = coreDataGenericService.checkObject(recipeName: recipeName)
+        return result.count == 1 ? true: false
     }
     
     func addFavorite(recipe: Recipe) {
-        let managedObjectContext = persistentContainer.viewContext
+        let managedObjectContext = coreDataGenericService.favoriteContext
         guard let recipeEntity = NSEntityDescription.entity(forEntityName: "FavoritesRecipes", in: managedObjectContext) else { return }
         let favoriteEntity = NSManagedObject(entity: recipeEntity, insertInto: managedObjectContext)
         favoriteEntity.setValue(recipe.image, forKey: "image")
@@ -77,18 +51,10 @@ class FavoriteModel {
         favoriteEntity.setValue(recipe.url, forKey: "url")
         favoriteEntity.setValue("\(recipe.yield)", forKey: "yield")
         
-        try? managedObjectContext.save()
+        coreDataGenericService.save()
     }
     
     func deleteFromFavorite(recipeName: String) {
-        let managedObjectContext = persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoritesRecipes")
-        fetchRequest.predicate = NSPredicate(format: "label = %@", recipeName)
-        let result = try? managedObjectContext.fetch(fetchRequest)
-        for favorite in result as! [NSManagedObject] {
-            managedObjectContext.delete(favorite)
-            
-            try? managedObjectContext.save()
-        }
+        coreDataGenericService.deleteObject(recipeName: recipeName)
     }
 }

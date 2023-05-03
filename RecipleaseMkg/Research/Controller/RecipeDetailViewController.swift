@@ -28,6 +28,8 @@ class RecipeDetailViewController: UIViewController {
     //MARK: -Properties
     var recipe: Recipe?
     
+    private let favoriteModel = FavoriteModel()
+    
     //MARK: -Override
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,13 +63,13 @@ class RecipeDetailViewController: UIViewController {
     
     @IBAction func makeFavorite(_ sender: Any) {
         guard let recipe = recipe else { return }
-        let isFavorite = FavoriteModel.shared.checkIfFavorite(recipeName: recipe.label)
+        let isFavorite = favoriteModel.checkIfFavorite(recipeName: recipe.label)
         if isFavorite {
-            FavoriteModel.shared.deleteFromFavorite(recipeName: recipe.label)
+            favoriteModel.deleteFromFavorite(recipeName: recipe.label)
             self.favoriteButton.tintColor = .white
             
         } else {
-            FavoriteModel.shared.addFavorite(recipe: recipe)
+            favoriteModel.addFavorite(recipe: recipe)
             self.favoriteButton.tintColor = .orange
         }
     }
@@ -80,12 +82,12 @@ class RecipeDetailViewController: UIViewController {
     //MARK: -Publics
     func checkIfFavorite() -> Bool {
             guard let recipeName = self.recipe?.label else { return false }
-            return FavoriteModel.shared.checkIfFavorite(recipeName: recipeName)
+            return favoriteModel.checkIfFavorite(recipeName: recipeName)
         }
         
         func deleteFromFavorite() {
             guard let recipeName = self.recipe?.label else { return }
-            FavoriteModel.shared.deleteFromFavorite(recipeName: recipeName)
+            favoriteModel.deleteFromFavorite(recipeName: recipeName)
         }
     
     func open(scheme: String) {

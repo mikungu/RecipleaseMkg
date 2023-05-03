@@ -272,7 +272,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zXL-IO-Orq">
                                 <rect key="frame" x="0.0" y="381.33333333333326" width="393" height="338.66666666666674"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="sectionIndexBackgroundColor" systemColor="systemGrayColor"/>
+                                <color key="sectionIndexBackgroundColor" red="0.13374861339031155" green="0.13352300895804656" blue="0.137463756443299" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="IngredientCell" id="zRB-TB-OEn">
                                         <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
@@ -281,7 +281,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                        <color key="backgroundColor" red="0.15584740288852034" green="0.15558452266899958" blue="0.16017638530927836" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -291,7 +291,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KEv-qU-La9"/>
-                        <color key="backgroundColor" systemColor="systemGrayColor"/>
+                        <color key="backgroundColor" red="0.1273227242454423" green="0.12710795887188286" blue="0.130859375" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="4LO-Os-6eu" firstAttribute="centerX" secondItem="new-Cu-7u2" secondAttribute="centerX" id="15v-tN-grx"/>
                             <constraint firstItem="4LO-Os-6eu" firstAttribute="leading" secondItem="KEv-qU-La9" secondAttribute="leading" constant="20" id="85J-o3-Kkm"/>
@@ -377,9 +377,6 @@
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
